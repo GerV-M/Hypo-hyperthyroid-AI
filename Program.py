@@ -6,12 +6,28 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import KNNImputer
+import kagglehub
 import warnings
 
 warnings.filterwarnings("ignore")
 
 # Чтение файлов, обработка датасетов
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+if not os.path.exists(os.path.join(BASE_DIR, "thyroidDF.csv")):
+    kagglehub.dataset_download(
+        "emmanuelfwerr/thyroid-disease-data",
+        path="thyroidDF.csv",
+        output_dir=BASE_DIR
+    )
+
+if not os.path.exists(os.path.join(BASE_DIR, "hypothyroid.csv")):
+    kagglehub.dataset_download(
+        "abdelazizsami/thyroid-gland-dataset",
+        path="hypothyroid.csv",
+        output_dir=BASE_DIR
+    )
+
 df1 = pd.read_csv(os.path.join(BASE_DIR, 'thyroidDF.csv'))
 df2 = pd.read_csv(os.path.join(BASE_DIR, 'hypothyroid.csv'))
 
